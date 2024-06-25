@@ -1,1 +1,73 @@
-&lt;3
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surv's website</title>
+  <style>
+    /* Root styling and variables */
+    :root, html, head, body {
+      margin: 0;
+      margin-top: 5px;
+      margin-left: 5px;
+      padding: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --background-color: black;
+      --lighter-bg: #333333;
+      --text-color: whitesmoke;
+      --block-margin: 5px;
+      --link-color: #3333dd;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    /* Classes */
+    .about-link {
+      cursor: pointer;
+      user-select: none;
+      color: var(--link-color);
+      font-weight: 500;
+    }
+    .block-header {
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .block-body {
+      margin-left: 5px;
+    }
+
+    /* Some specific parts of the page and their stylings */
+    [data-opt="page.header"] {
+      font-weight: bolder;
+      font-size: larger;
+      margin-bottom: 2px;
+    }
+    [data-opt="about.name"] {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div data-opt="page.header">surv.is-a.dev</div>
+  <div data-opt="page.about-me">
+    <span>Hello my name is <span data-opt="about.name">&quot;Miyo&quot;</span>&period;</span>
+    <p data-opt="about.body">I am a self-taught JavaScript dev, and <strong>former</strong> TurboWarp extension developer.</p>
+    <span class="block-header">My Accounts</span><br />
+    <div data-opt="about.socials" class="block-body">
+      <span class="about-link" href="https://github.com/yuri-kiss/">GitHub</span><br />
+    </div>
+    <span class="block-header">Some of the stuff I have made:</span><br />
+    <div data-opt="about.links" class="block-body">
+      <span class="about-link" href="./gallery">TurboWarp extension gallery</span><br />
+      <!-- I may add my patch generator and stuff but I dont feel the need. -->
+    </div>
+  </div>
+  <script>
+    document.addEventListener('click', (ev) => {
+      if (ev.target.classList.contains('about-link')) {
+        window.open(ev.target.getAttribute('href'), '_blank');
+      }
+    });
+  </script>
+</body>
+</html> 
