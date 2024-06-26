@@ -6,11 +6,13 @@
   <title>Surv's website</title>
   <style>
     /* Root styling and variables */
-    :root, html, head, body {
+    :root, html, head, body{
       margin: 0;
       margin-top: 5px;
       margin-left: 5px;
       padding: 0;
+    }
+    :root, html, head, body, [data-opt="nsfw.popup"] {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       --background-color: black;
       --lighter-bg: #333333;
@@ -20,13 +22,25 @@
       background-color: var(--background-color);
       color: var(--text-color);
     }
+    
+    /* Element specific styling */
+    code {
+      background: #555555;
+      color: white;
+      font-family: "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding: 1px;
+    }
 
     /* Classes */
-    .about-link {
+    .custom-link {
       cursor: pointer;
       user-select: none;
       color: var(--link-color);
       font-weight: 500;
+    }
+    .custom-link-sub {
+      user-select: none;
+      font-weight: 600;
     }
     .block-header {
       font-weight: bold;
@@ -45,29 +59,97 @@
     [data-opt="about.name"] {
       font-weight: bold;
     }
+    [data-opt="about.pronouns"] {
+      border: 0px none;
+      border-radius: 5px;
+    }
+
+    /* NSFW dialog styling */
+    [data-opt="nsfw.popup"] {
+      border: none;
+      background: #333333;
+      border: 0px none;
+      border-radius: 10px;
+    }
+    [data-opt="nsfw.header"] {
+      font-weight: bolder;
+      font-size: large;
+      color: red;
+    }
   </style>
 </head>
 <body>
+  <!-- This site is not very interesting I dont know why you are snooping. -->
   <div data-opt="page.header">surv.is-a.dev</div>
   <div data-opt="page.about-me">
-    <span>Hello my name is <span data-opt="about.name">&quot;Miyo&quot;</span>&period;</span>
-    <p data-opt="about.body">I am a self-taught JavaScript dev, and <strong>former</strong> TurboWarp extension developer.</p>
+    <!-- Im not going to specifically say my gender keep that in mind, but she / her does not mean im a girl but it does not mean im a guy or anything else so drop it. -->
+    <span>Hello my name is <span data-opt="about.name" title="This is in quotes cause its a nickname :D">"Miyo"</span>. <code data-opt="about.pronouns" title="pronouns">she / her</code></span>
+    <p data-opt="about.body">
+      I am a self-taught JavaScript dev, and <span title="Former because I am having issues."><strong>former</strong> TurboWarp extension developer,</span><br />
+      I like <span class="custom-link" href="https://en.wikipedia.org/wiki/Yuri_(genre)/" title="ガールズラブ" data-sensitive>yuri</span>,  making silly stuff that makes me and others happy (sometimes its useless).<br />
+    </p>
     <span class="block-header">My Accounts</span><br />
     <div data-opt="about.socials" class="block-body">
-      <span class="about-link" href="https://github.com/yuri-kiss/">GitHub</span><br />
+      <!-- I mean I know I could use https://linktr.ee/0znzw/ but I wanna do it myself -->
+      <span class="custom-link" href="https://github.com/yuri-kiss/" title="I have an alt its AshimeeAlt">GitHub</span><br />
+      <!-- I use the long form of the link because its more reliable -->
+      <span class="custom-link" href="https://www.youtube.com/channel/UC5VpHnhQYLoc7rkLSBzK8GA/" title="I dont upload much">Youtube</span><br />
+      <span class="custom-link" href="https://scratch.mit.edu/users/0znzw/" title="Wow its where I started <3">Scratch</span><br />
+      <span class="custom-link" href="https://disqus.com/by/AshmiiPlus1/" title="I dont use this often">Disqus</span><br />
+      <span class="custom-link" href="https://www.twitch.tv/ssmclive/" title="This is dead">Twitch</span><br />
+      <!-- You were warned :yawn -->
+      <span class="custom-link-sub">18+</span><br />
+      <span class="custom-link" href="https://www.reddit.com/user/Sea1U/" title="Degenerate?" data-nsfw>Reddit</span><br />
     </div>
     <span class="block-header">Some of the stuff I have made:</span><br />
     <div data-opt="about.links" class="block-body">
-      <span class="about-link" href="./gallery">TurboWarp extension gallery</span><br />
+      <span class="custom-link" href="./gallery" title="My own custom made TurboWarp extension galley!!">My TurboWarp extension gallery</span><br />
+      <span class="custom-link" href="https://goofywarp.github.io/extensions/" title="I 'Founded' this.">GoofyWarp extension gallery</span><br />
       <!-- I may add my patch generator and stuff but I dont feel the need. -->
     </div>
+    <dialog data-opt="nsfw.popup">
+      <!-- Dont remove this you fucking degenerate -->
+      <span data-opt="nsfw.header">Sensitive Content ahead!</span><br />
+      <span data-opt="nsfw.caption">/!\ WARNING /!\</span>
+      <span><p data-opt="nsfw.description" data-nsfwmode="1" style="display: none;">
+        By pressing "continue", you affirm that you are at least 18 years of age,<br />
+        or the age of majority in the jurisdiction you are accessing the website from,<br />
+        and you consent to viewing explicit content.
+      </p>
+      <p data-opt="nsfw.description" data-nsfwmode="2" style="display: none;">
+        By pressing "continue", you affirm that you consent to viewing sensitive content.
+      </p></span>
+      <button onclick="nsfwDialog.resolve(true);">Continue</button>&Tab;<button onclick="nsfwDialog.resolve(false);">EXIT</button>
+    </dialog>
   </div>
   <script>
+    const nsfwDialog = document.querySelector('dialog[data-opt="nsfw.popup"]');
+    nsfwDialog.show = function(resolve, mode) {
+      this.resolve = resolve;
+      this.querySelector(`[data-nsfwmode="${mode}"]`).style = '';
+      this.showModal();
+    };
+    nsfwDialog.hide = function() {
+      this.resolve = null;
+      this.querySelectorAll(`[data-nsfwmode]`).forEach(node => node.style.display = 'none');
+      this.close();
+    }
     document.addEventListener('click', (ev) => {
-      if (ev.target.classList.contains('about-link')) {
-        window.open(ev.target.getAttribute('href'), '_blank');
+      const elm = ev.target;
+      if (elm.classList.contains('custom-link')) {
+        new Promise((resolve) => {
+          if (Object.hasOwn(elm.dataset, 'nsfw')) {
+            nsfwDialog.show(resolve, 1);
+          } else if (Object.hasOwn(elm.dataset, 'sensitive')) {
+            nsfwDialog.show(resolve, 2);
+          } else resolve(true);
+        }).then(open => {
+          nsfwDialog.hide();
+          if (open) window.open(elm.getAttribute('href'), '_blank');
+        });
       }
     });
+    // Since ur reading this, will u buy me some thigh highs :is_for_me:
   </script>
 </body>
 </html> 
