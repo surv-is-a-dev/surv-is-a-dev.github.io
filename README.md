@@ -1,4 +1,4 @@
-# yuri-kiss.github.io
+# surv.is-a.dev
 
 This is my simple little website.
 
