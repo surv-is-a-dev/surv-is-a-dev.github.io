@@ -6,7 +6,7 @@
   <title>Surv's website</title>
   <style>
     /* Root styling and variables */
-    :root, html, head, body{
+    :root, html, head, body, {
       margin: 0;
       margin-top: 5px;
       margin-left: 5px;
@@ -14,11 +14,11 @@
     }
     :root, html, head, body, [data-opt="nsfw.popup"] {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --background-color: black;
-      --lighter-bg: #333333;
+      --background-color: #333;
+      --lighter-bg: #555;
       --text-color: whitesmoke;
       --block-margin: 5px;
-      --link-color: #3333dd;
+      --link-color: #33d;
       background-color: var(--background-color);
       color: var(--text-color);
     }
@@ -52,9 +52,22 @@
 
     /* Some specific parts of the page and their stylings */
     [data-opt="page.header"] {
+      display: block;
       font-weight: bolder;
       font-size: larger;
-      margin-bottom: 2px;
+      margin-left: -8px !important;
+      margin-top: -8px !important;
+      width: fit-content;
+      background-color: #000;
+      box-shadow: 14px 21px 37px -29px #000000ff;
+      -webkit-box-shadow: 14px 14px 37px -29px #000000ff;
+      -moz-box-shadow: 14px 27px 37px -29px #000000ff;
+    }
+    [data-opt="page.header"] > span {
+      padding-left: 10px;
+      padding-top: 15px;
+      padding-right: 10px;
+      padding-bottom: 12px;
     }
     [data-opt="about.name"] {
       font-weight: bold;
@@ -63,6 +76,10 @@
       border: 0px none;
       border-radius: 5px;
     }
+    [data-opt="nonbinary.heart"] {
+      position: relative;
+      transform: translate(0px, 5px);
+    }
 
     /* NSFW dialog styling */
     [data-opt="nsfw.popup"] {
@@ -70,6 +87,9 @@
       background: #333333;
       border: 0px none;
       border-radius: 10px;
+      box-shadow: -2px 10px 55px 11px rgba(0,0,0,0.61);
+      -webkit-box-shadow: -2px 10px 55px 11px rgba(0,0,0,0.61);
+      -moz-box-shadow: -2px 10px 55px 11px rgba(0,0,0,0.61);
     }
     [data-opt="nsfw.header"] {
       font-weight: bolder;
@@ -80,26 +100,24 @@
 </head>
 <body>
   <!-- This site is not very interesting I dont know why you are snooping. -->
-  <div data-opt="page.header">surv.is-a.dev</div>
+  <div data-opt="page.header"><span>surv.is-a.dev</span></div>
   <div data-opt="page.about-me">
-    <!-- Im not going to specifically say my gender keep that in mind, but she / her does not mean im a girl but it does not mean im a guy or anything else so drop it. -->
-    <span>Hello my name is <span data-opt="about.name" title="This is in quotes cause its a nickname :D">"Miyo"</span>. <code data-opt="about.pronouns" title="pronouns">she / her</code></span>
+    <span>Hello my name is <span data-opt="about.name" title="This is in quotes cause its a nickname :D">"Miyo"</span>. <code data-opt="about.pronouns" title="pronouns">she / her</code> <img src="https://surv.is-a.dev/images/nonbinary-heart.svg" width="24" height="24" data-opt="nonbinary.heart" draggable="false"></img></span>
     <p data-opt="about.body">
       I am a self-taught JavaScript dev, and <span>TurboWarp extension developer,</span><br />
-      I like <span class="custom-link" href="https://en.wikipedia.org/wiki/Yuri_(genre)" title="ガールズラブ" data-sensitive>yuri</span>,  making silly stuff that makes me and others happy (sometimes its useless).<br />
-      Also something you should know <span title="I dont take pride in this, its just a fact :(">is I am very short temper'ed!</span><br />
+      I like <span class="custom-link" href="https://en.wikipedia.org/wiki/Yuri_(genre)" title="ガールズラブ" data-sensitive>yuri</span>,  making silly stuff that makes me and others happy (sometimes it is useless).<br />
     </p>
     <span class="block-header">My Accounts</span><br />
     <div data-opt="about.socials" class="block-body">
       <!-- I mean I know I could use https://linktr.ee/0znzw/ but I wanna do it myself -->
       <span class="custom-link" href="https://github.com/yuri-kiss/" title="I have an alt its AshimeeAlt">GitHub</span><br />
-      <!-- I use the long form of the link because its more reliable -->
-      <span class="custom-link" href="https://www.youtube.com/channel/UC5VpHnhQYLoc7rkLSBzK8GA/" title="I dont upload much">Youtube</span><br />
+      <!-- I use the long form of the link because it is more reliable -->
+      <span class="custom-link" href="https://www.youtube.com/channel/UC5VpHnhQYLoc7rkLSBzK8GA/" title="I don't upload much">Youtube</span><br />
       <span class="custom-link" href="https://scratch.mit.edu/users/0znzw/" title="Wow its where I started <3">Scratch</span><br />
-      <span class="custom-link" href="https://disqus.com/by/AshmiiPlus1/" title="I dont use this often">Disqus</span><br />
+      <span class="custom-link" href="https://disqus.com/by/AshmiiPlus1/" title="I don't use this often">Disqus</span><br />
       <span class="custom-link" href="https://www.twitch.tv/ssmclive/" title="This is dead">Twitch</span><br />
       <span class="custom-link" href="#" title="">Discord: @yri5</span><br />
-      <!-- You were warned :yawn -->
+      <!-- You were warned :yawn: -->
       <span class="custom-link-sub">18+</span><br />
       <span class="custom-link" href="https://www.reddit.com/user/Sea1U/" title="Degenerate?" data-nsfw>Reddit</span><br />
     </div>
@@ -119,7 +137,7 @@
         and you consent to viewing explicit content.
       </p>
       <p data-opt="nsfw.description" data-nsfwmode="2" style="display: none;">
-        By pressing "continue", you affirm that you consent to viewing sensitive content.
+        By pressing "continue", you affirm that you consent to view sensitive content.
       </p></span>
       <button onclick="nsfwDialog.resolve(true);">Continue</button>&Tab;<button onclick="nsfwDialog.resolve(false);">EXIT</button>
     </dialog>
@@ -151,7 +169,6 @@
         });
       }
     });
-    // Since ur reading this, will u buy me some thigh highs :is_for_me:
   </script>
 </body>
 </html> 
