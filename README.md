@@ -2,4 +2,4 @@
 
 This is my simple little website.
 
-License: LGPLv3
+License: The Unlicense
