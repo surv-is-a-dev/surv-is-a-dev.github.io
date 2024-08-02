@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surv's website</title>
+  <style>
+    /* Root styling and variables */
+    :root, html, head, body, {
+      margin: 0;
+      margin-top: 5px;
+      margin-left: 5px;
+      padding: 0;
+    }
+    :root, html, head, body, [data-opt="nsfw.popup"] {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --background-color: #333;
+      --lighter-bg: #555;
+      --text-color: whitesmoke;
+      --block-margin: 5px;
+      --link-color: #33d;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+    
+    /* Element specific styling */
+    code {
+      background: #555555;
+      color: white;
+      font-family: "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding: 1px;
+    }
+
+    /* Classes */
+    .custom-link {
+      cursor: pointer;
+      user-select: none;
+      color: var(--link-color);
+      font-weight: 500;
+    }
+    .custom-link-sub {
+      user-select: none;
+      font-weight: 600;
+    }
+    .block-header {
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .block-body {
+      margin-left: 5px;
+    }
+
+    /* Some specific parts of the page and their stylings */
+    [data-opt="page.header"] {
+      display: block;
+      font-weight: bolder;
+      font-size: larger;
+      margin-left: -8px !important;
+      margin-top: -8px !important;
+      width: fit-content;
+      background-color: #000;
+      box-shadow: 14px 21px 37px -29px #000000ff;
+      -webkit-box-shadow: 14px 14px 37px -29px #000000ff;
+      -moz-box-shadow: 14px 27px 37px -29px #000000ff;
+    }
+    [data-opt="page.header"] > span {
+      padding-left: 10px;
+      padding-top: 15px;
+      padding-right: 10px;
+      padding-bottom: 12px;
+    }
+    [data-opt="about.name"] {
+      font-weight: bold;
+    }
+    [data-opt="about.pronouns"] {
+      border: 0px none;
+      border-radius: 5px;
+    }
+    [data-opt="nonbinary.heart"] {
+      position: relative;
+      transform: translate(0px, 5px);
+    }
+
+    /* NSFW dialog styling */
+    [data-opt="nsfw.popup"] {
+      border: none;
+      background: #333333;
+      border: 0px none;
+      border-radius: 10px;
+      box-shadow: -2px 10px 55px 11px rgba(0,0,0,0.61);
+      -webkit-box-shadow: -2px 10px 55px 11px rgba(0,0,0,0.61);
+      -moz-box-shadow: -2px 10px 55px 11px rgba(0,0,0,0.61);
+    }
+    [data-opt="nsfw.header"] {
+      font-weight: bolder;
+      font-size: large;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- This site is not very interesting I dont know why you are snooping. -->
+  <div data-opt="page.header"><span>surv.is-a.dev</span></div>
+  <div data-opt="page.about-me">
+    <span class="block-header">Accounts</span><br />
+    <div data-opt="about.socials" class="block-body">
+      <span class="custom-link" href="https://github.com/yuri-kiss/" title="I have an alt its AshimeeAlt">GitHub</span><br />
+      <!-- I use the long form of the link because it is more reliable -->
+      <span class="custom-link" href="https://www.youtube.com/channel/UC5VpHnhQYLoc7rkLSBzK8GA/" title="I don't upload much">Youtube</span><br />
+      <span class="custom-link" href="https://scratch.mit.edu/users/0znzw/" title="Wow its where I started <3">Scratch</span><br />
+      <span class="custom-link" href="https://disqus.com/by/AshmiiPlus1/" title="I don't use this often">Disqus</span><br />
+      <span class="custom-link" href="https://www.twitch.tv/ssmclive/" title="This is dead">Twitch</span><br />
+      <span class="custom-link" href="https://discordapp.com/users/1124880299302592643" title="DM me if you want :3">Discord: @yri5</span><br />
+      <!-- You were warned :yawn: -->
+      <span class="custom-link-sub">18+</span><br />
+      <span class="custom-link" href="https://www.reddit.com/user/Sea1U/" title="Degenerate?" data-nsfw>Reddit</span><br />
+    </div>
+    <span class="block-header">Some of the stuff I have made:</span><br />
+    <div data-opt="about.links" class="block-body">
+      <span class="custom-link" href="./gallery" title="My own custom made TurboWarp extension galley!!">My TurboWarp extension gallery</span><br />
+      <span class="custom-link" href="https://goofywarp.github.io/extensions/" title="I 'Founded' this.">GoofyWarp extension gallery</span><br />
+    </div>
+    <dialog data-opt="nsfw.popup">
+      <!-- Dont remove this you fucking degenerate -->
+      <span data-opt="nsfw.header">Sensitive Content ahead!</span><br />
+      <span data-opt="nsfw.caption">/!\ WARNING /!\</span>
+      <span><p data-opt="nsfw.description" data-nsfwmode="1" style="display: none;">
+        By pressing "continue", you affirm that you are at least 18 years of age,<br />
+        or the age of majority in the jurisdiction you are accessing the website from,<br />
+        and you consent to viewing explicit content.
+      </p>
+      <p data-opt="nsfw.description" data-nsfwmode="2" style="display: none;">
+        By pressing "continue", you affirm that you consent to view sensitive content.
+      </p></span>
+      <button onclick="nsfwDialog.resolve(true);">Continue</button>&Tab;<button onclick="nsfwDialog.resolve(false);">EXIT</button>
+    </dialog>
+  </div>
+  <script>
+    const nsfwDialog = document.querySelector('dialog[data-opt="nsfw.popup"]');
+    nsfwDialog.show = function(resolve, mode) {
+      this.resolve = resolve;
+      this.querySelector(`[data-nsfwmode="${mode}"]`).style = '';
+      this.showModal();
+    };
+    nsfwDialog.hide = function() {
+      this.resolve = null;
+      this.querySelectorAll(`[data-nsfwmode]`).forEach(node => node.style.display = 'none');
+      this.close();
+    }
+    document.addEventListener('click', (ev) => {
+      const elm = ev.target;
+      if (elm.classList.contains('custom-link')) {
+        new Promise((resolve) => {
+          if (Object.hasOwn(elm.dataset, 'nsfw')) {
+            nsfwDialog.show(resolve, 1);
+          } else if (Object.hasOwn(elm.dataset, 'sensitive')) {
+            nsfwDialog.show(resolve, 2);
+          } else resolve(true);
+        }).then(open => {
+          nsfwDialog.hide();
+          if (open) window.open(elm.getAttribute('href'), '_blank');
+        });
+      }
+    });
+  </script>
+</body>
+</html> 
