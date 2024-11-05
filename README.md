@@ -2,4 +2,4 @@
 
 This is my simple little website.
 
-License: The Unlicense
+License: AGPL-3.0
