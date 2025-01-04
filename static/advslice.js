@@ -1,3 +1,4 @@
+(() => {const log=console.log.bind(console);console.log=function(...logs){log(...logs);document.write(logs.join('&nbsp;') + '<br />');}})();
 // Advanced slice. https://scratch.mit.edu/users/0znzw/
 // All rights reserved
 
@@ -104,6 +105,12 @@ String.prototype.cutPattern = (() => {
             tdat.length = 0;
             break;
           };
+          case cutPattern.MAPtokens.COND: {
+            canToken = [
+              cutPattern.MAPtokens.SLCS,
+            ];
+            break;
+          };
           default: break;
         }
         continue;
@@ -157,8 +164,7 @@ String.prototype.cutPattern = (() => {
             break;
           };
           case cutPattern.MAPtokens.GOTO: {
-            // @todo - clamp this
-            i = num;
+            i = Math.min(Math.max(num, 0), this.length - 1);
             num = 0;
             break;
           };
@@ -180,7 +186,7 @@ String.prototype.cutPattern = (() => {
     SKIP: `>`, // go forward tokens
     SSLC: `[`, // start slice
     ESLC: `]`, // end slice
-    SLCS: `,`, // slice seperator, also conditional seperator 1
+    SLCS: `,`, // slice seperator
     BACK: `<`, // go back tokens
     REPT: `*`, // repeat string using slice syntax
     GREV: `-`, // reverse grab (grabs then reverses the data)
@@ -190,14 +196,12 @@ String.prototype.cutPattern = (() => {
     EXEC: `$`, // execute expression using a group
     APPD: `&`, // append to string using a group
     GOTO: `@`, // sets the current index
-    COND: `?`, // starts a conditional
-    CNDU: `:`, // conditional seperator 2
   };
-  cutPattern.REGtokens = /[;+>\[<,\]*\-&()$#@]/;
+  cutPattern.REGtokens = /[;+>\[<,\]*\-&()$#@?:]/;
   cutPattern.REGnums = /[0-9]/;
+  cutPattern.REGmatch = /[=!]/;
   return cutPattern;
 })();
-
 console.log(`abc123defg`.cutPattern('+3>3;')); // abcdefg
 console.log(`abc123defg`.cutPattern('+3>2+3')); // abc3de
 console.log(`abc123defg`.cutPattern('+3<3+3')); // abcabc
@@ -209,5 +213,3 @@ console.log(`ohce lloHe", Wordl!`.cutPattern('>1-3<4+1>3+1[10,1]>3+2<5+3>3+5-2+1
 console.log(`(Hello`.cutPattern('+6#(, World\\))&1')); // (Hello, World)
 console.log(`abc123defg`.cutPattern('#(+3)$1')); // abc
 console.log(`abc123defg`.cutPattern('+3@6+3')); // abcdef
-// broken
-console.log(`Hello, World`.cutPattern('#(Hello)#(Goodbye)#(What)?1,&2:&3;')); // Goodbye, World
