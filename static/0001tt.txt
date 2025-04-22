@@ -31,16 +31,15 @@ when matching these value's you SHOULD allow the index, string AND the combo.
  * @param {number} [count] Modulo value. this is optional.
  * @returns {string}
  */
-function _asValue(value, count) {/**!@see https://surv-is-a-dev.github.io/static/0001tt.txt*/
-  if (typeof value === 'number') return Cast.toString((value % +(count || Infinity) || 0) + 1);
+function asValue(value, count) {/**!@see https://surv-is-a-dev.github.io/static/0001tt.txt*/
+  if (typeof value === 'number') return ((+value % (1+count || 1)) || 1).toString();
   value = Cast.toString(value).toLowerCase();
   if (value[0] !== '(') return value;
-  const match = value.match(/^\([0-9]+\) /);
+  const match = value.match(/^\([0-9]+\) ?/);
   if (match && match[0]) {
-    if (count) {
-      return ((parseInt(value.slice(1, -2)) % +count || 0) + 1).toString();
-    }
-    return value.slice(1, -2);
+    const v = parseInt(match[0].trim().slice(1, -1));
+    if (count) return ((v % (1+count || 1)) || 1).toString();
+    return v.toString();
   }
   return value;
 }
