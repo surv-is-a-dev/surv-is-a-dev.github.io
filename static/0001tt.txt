@@ -1,0 +1,68 @@
+// Start license: MiyoAttributionLicense-1.0
+Copyright <2025> <Miyo Sho>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this text document
+(the "text document" refers to the contents of the website "https://surv-is-a-dev.github.io/static/0001tt.txt")
+and the JavaScript written within said text document (the "Software"), to deal in the Software under the following conditions:
+
+1. The rights to distribute the Software are granted, but selling and/or patenting copies of the Software is strictly forbidden.
+2. The only limitation on the rights to use, copy, modify, merge, publish, and/or sublicense copies of the Software is that proper
+    attribution must be given by linking to "https://surv-is-a-dev.github.io/static/0001tt.txt" above, inside, or below the contents
+    of the Software.
+3. Permission is granted to allow persons to whom the Software is furnished to do so.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+// End License
+
+A valid translatable item should be formatted as such. `(#) string`
+with # being a number and "string" being the data.
+
+when matching these value's you SHOULD allow the index, string AND the combo.
+-# modulo is prefered when doing values.
+
+## start "the Software"
+/**
+ * Convert's a translatable menu value to a index or a string.
+ * @param {string|number} value Item in valid format.
+ * @param {number} [count] Modulo value. this is optional.
+ * @returns {string}
+ */
+function _asValue(value, count) {/**!@see https://surv-is-a-dev.github.io/static/0001tt.txt*/
+  if (typeof value === 'number') return Cast.toString((value % +(count || Infinity) || 0) + 1);
+  value = Cast.toString(value).toLowerCase();
+  if (value[0] !== '(') return value;
+  const match = value.match(/^\([0-9]+\) /);
+  if (match && match[0]) {
+    if (count) {
+      return ((parseInt(value.slice(1, -2)) % +count || 0) + 1).toString();
+    }
+    return value.slice(1, -2);
+  }
+  return value;
+}
+// an example on how to use this can be found in the turbowarp extension "since 2000" by ionslayer
+// a copy of this extension can be found at https://gallery.miyo.lol/extensions/ION/Since2k.js
+## end "the Software"
+
+// extended docs
+
+the above function assumes "Cast" is just Scratch.Cast. and returns a string.
+if there is parenths with a number in it, then it will return that number instead as a string.
+if the value passed is a number it will 
+
+if no parenthises are found it will return the string value that was supplied. (make sure you use value in your menu items or this WILL break when translating see #:1)
+if the count is 0, or not specified then it will default to the value inside the parenthises.
+
+any time a number is seen as the return value if you provide a "count" value that is above 0 then it will modulo the value (value % count) and add 1.
+
+#:1 If you want to use this format then you should most defininatly put the value's in english or your native language.
+    an example menu item would be:
+
+{
+  text: Scratch.translate('(1) hello'),
+  value: 'hello',
+}
