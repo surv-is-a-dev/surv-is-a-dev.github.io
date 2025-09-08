@@ -44,7 +44,7 @@ function asValue(value, count) {/**!@see https://surv-is-a-dev.github.io/static/
   return value;
 }
 // an example on how to use this can be found in the turbowarp extension "since 2000" by ionslayer
-// a copy of this extension can be found at https://gallery.miyo.lol/extensions/ION/Since2k.js
+// a copy of this extension can be found at https://gallery.miyo.icu/extensions/ION/Since2k.js
 ## end "the Software"
 
 // extended docs
