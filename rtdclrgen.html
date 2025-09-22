@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html><head><!-- Do whatever this is licensed under the UNLICENSE, idgaf what you do with this crappy site. --></head>
+<body style="margin: 0px; padding: 0px;">
+<div style="background-color: #ffffff; width:fit-content; height:fit-content; padding: 5px;">
+retarded colour generator</div>
+<style>span{padding-left:5px;padding-right:5px;}</style>
+<div style="background-color: #ffffff; width:fit-content; height:fit-content; padding: 5px;">
+<input id="c" type="color" value="#ff0000" /><span id="a"></span>
+<button onclick="generate()">GENERATE</button><span id="b"></span></div><script defer>
+window.c = document.querySelector('input[type="color"]');
+function invert(hex) {
+  const hash = hex[0] === '#';
+  if (hash) hex = hex.slice(1, Infinity);
+  hex = [parseInt(hex.slice(0,2), 16),
+         parseInt(hex.slice(2,4), 16),
+         parseInt(hex.slice(4,6), 16)];
+  hex[0] = 255 - hex[0];
+  hex[1] = 255 - hex[1];
+  hex[2] = 255 - hex[2];
+  hex = `${
+    hex[0].toString(16).padStart(2, '0')
+  }${
+    hex[1].toString(16).padStart(2, '0')
+  }${
+    hex[2].toString(16).padStart(2, '0')
+  }`;
+  if (hash) return '#' + hex;
+  return hex;
+}
+c.onchange = function() {
+  const inv = invert(this.value);
+  document.body.style.backgroundColor = inv;
+  document.querySelector('span#a').textContent = this.value;
+  document.querySelector('span#b').textContent = `inverted: ${inv}`;
+  
+};
+function generate() {
+  const colour = `#${
+    Math.floor(Math.random() * 256).toString(16).padStart(2, '0')
+  }${
+    Math.floor(Math.random() * 256).toString(16).padStart(2, '0')
+  }${
+    Math.floor(Math.random() * 256).toString(16).padStart(2, '0')
+  }`;
+  c.value = colour;
+  c.onchange();
+}
+generate();
+</script>
+</body></html>
