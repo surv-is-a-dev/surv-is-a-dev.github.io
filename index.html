@@ -37,9 +37,6 @@
         padding: 0px;
       }
       :root, html, body {
-        overflow-y: hidden;
-        width: 100%;
-        height: 100%;
         margin: 0px;
         padding: 0px;
         background: rgb(33, 37, 41);
@@ -50,105 +47,20 @@
         font-style: normal;
         color-scheme: dark;
       }
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
       div.main {
-        margin-left: 2vw;
-        margin-top: 2vh;
-        max-width: fit-content;
-        max-height: fit-content;
-      }
-      div.top {
-        display: inline-flex;
-        max-width: 100%;
-        box-shadow: white solid 0.2vh;
-      }
-      div.heading {
-        display: inline-block;
-        min-width: 49%;
-        max-width: 49%;
-        width: fit-content;
-        height: 100%;
-      }
-      div.header {
-        display: flex;
-        align-items: center;
-      }
-      div.header > img {
-        width: 5vw;
-        height: auto;
-        border-radius: 100%;
-        float: left;
-      }
-      div.header > span {
-        font-size: 2vw;
-        font-weight: bold;
-        padding-top: 0.25vh;
-        padding-bottom: 0.25vh;
-        padding-right: 0.25vw;
-        margin-left: 0.5vw;
-        border-top: dotted white 0.7vh;
-        border-bottom: dotted white 0.7vh;
-        border-right: dotted white 0.7vh;
-        min-width: fit-content;
-      }
-      div.about {
-        margin-top: 1vh;
-        font-size: 2vh;
-      }
-      div.socials-wrapper-wrapper {
-        display: inline-block;
-        width: 49%;
-      }
-      div.socials-wrapper {
-        display: block;
-      }
-      div.socials-wrapper > span {
-        font-size: 1.5vw;
-        font-weight: 450;
-      }
-      div.socials {
-        display: grid;
-      }
-      div.socials > div.social {
-        display: inline-flex;
-        align-items: center;
-      }
-      div.social > img {
-        width: 1vw;
-        height: auto;
-      }
-      div.social > a {
-        margin-left: 2%;
-        margin-right: 4%;
-        font-size: 2vh;
-      }
-      span.hbreak {
-        display: block;
-      }
-      span.vbar {
-        display: block;
-        min-height: 100%;
-        min-width: 0;
-        max-width: 0;;
-        border: 0.1vw solid white;
-        border-radius: 0.25vh;
-        margin-left: 4%;
-        margin-right: 1%;
-      }
-      div.bottom {
-        display: inline-block;
-      }
-      div.bottom > span:nth-child(1) {
-        font-size: 1.5vw;
-        font-weight: 450;
-      }
-      div.projects {
-        display: grid;
-        width: 100%;
-        height: fit-content;
-        margin-left: 0.75vw;
-      }
-      div.project {
-        font-size: 2vh;
+        position: absolute;
+        z-index: 1;
+        width: auto;
+        height: 90%;
+        aspect-ratio: 1 / 1;
+        /*background: red;*/
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
 
       div.mwah {
@@ -156,120 +68,325 @@
         opacity: 0.6;
         right: 5px;
         bottom: 5px;
+        z-index: 32767;
       }
       div.mwah > a {
         text-decoration: none;
       }
+      
+      div.name {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        font-weight: bolder;
+        font-size: x-large;
+        opacity: 0.0;
+        transition: opacity 1200ms;
+        
+        position: absolute;
+        z-index: 3;
+        top: 10%;
+      }
+      
+      canvas.main {
+        width: auto;
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        background: rgba(0, 0, 0, 0);
+      }
+      
+      a.clickwrapper {
+        text-decoration: inherit;
+        color: inherit;
+      }
+      a.circlelink {
+        position: absolute;
+        z-index: 4;
+        background: white;
+        border-radius: 5px;
+        border: none;
+        padding: 2px;
+        top: 0px;
+        left: 0px;
+        opacity: 0.0;
+        transition: opacity 225ms;
+        visibility: hidden;
+      }
+      
+      div.main > a > img.pfp {
+        width: auto;
+        height: 12.5%;
+        aspect-ratio: 1 / 1;
+        border-radius: 100%;
+        border: none;
+        opacity: 0.0;
+        transition: opacity 1200ms;
+        
+        position: absolute;
+        z-index: 2;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      modal#about {
+        width: 50%;
+        height: 50%;
+      }
     </style>
   </head>
   <body>
-    <div class="main">
-      <div class="top">
-        <div class="heading">
-          <div class="header">
-            <img onerror="this.src='./static/profile.jpeg';" src="https://gravatar.com/avatar/56ff3cc2bbdd81da1545b16880f7c538?size=256" alt="My profile picture" />
-            <span>yuri-kiss</span>
-          </div>
-          <div class="about">
-            Hello, I am みよ / みお.<br />My discord is yri5 and it is closed to dms most the time.<br />That is all you need to know.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </div>
-        </div>
-        <span class="vbar"></span>
-        <div class="socials-wrapper-wrapper">
-          <div class="socials-wrapper">
-            <span>Socials</span>
-            <div class="socials">
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M2.424,17.977l.068-10.18c.012-1.843,1.301-3.423,3.08-3.775l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.013,1.842-1.302,3.421-3.081,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.828Z" opacity=".2"></path><path d="M7.241,22.039l.068-10.182c.011-1.841,1.301-3.42,3.08-3.773l9.831-1.948c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.842-1.301,3.421-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827v-.002Z" opacity=".5"></path><path d="M12.058,26.1l.068-10.182c.012-1.843,1.301-3.421,3.08-3.774l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.843-1.301,3.422-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827h0Z" opacity=".8"></path></svg>' />
-                <a href="https://gravatar.com/miyosho/">Gravatar</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M16,2.345c7.735,0,14,6.265,14,14-.002,6.015-3.839,11.359-9.537,13.282-.7,.14-.963-.298-.963-.665,0-.473,.018-1.978,.018-3.85,0-1.312-.437-2.152-.945-2.59,3.115-.35,6.388-1.54,6.388-6.912,0-1.54-.543-2.783-1.435-3.762,.14-.35,.63-1.785-.14-3.71,0,0-1.173-.385-3.85,1.435-1.12-.315-2.31-.472-3.5-.472s-2.38,.157-3.5,.472c-2.677-1.802-3.85-1.435-3.85-1.435-.77,1.925-.28,3.36-.14,3.71-.892,.98-1.435,2.24-1.435,3.762,0,5.355,3.255,6.563,6.37,6.913-.403,.35-.77,.963-.893,1.872-.805,.368-2.818,.963-4.077-1.155-.263-.42-1.05-1.452-2.152-1.435-1.173,.018-.472,.665,.017,.927,.595,.332,1.277,1.575,1.435,1.978,.28,.787,1.19,2.293,4.707,1.645,0,1.173,.018,2.275,.018,2.607,0,.368-.263,.787-.963,.665-5.719-1.904-9.576-7.255-9.573-13.283,0-7.735,6.265-14,14-14Z"></path></svg>' />
-                <a href="https://github.com/yuri-kiss/">Github</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M16,2.345c7.735,0,14,6.265,14,14-.002,6.015-3.839,11.359-9.537,13.282-.7,.14-.963-.298-.963-.665,0-.473,.018-1.978,.018-3.85,0-1.312-.437-2.152-.945-2.59,3.115-.35,6.388-1.54,6.388-6.912,0-1.54-.543-2.783-1.435-3.762,.14-.35,.63-1.785-.14-3.71,0,0-1.173-.385-3.85,1.435-1.12-.315-2.31-.472-3.5-.472s-2.38,.157-3.5,.472c-2.677-1.802-3.85-1.435-3.85-1.435-.77,1.925-.28,3.36-.14,3.71-.892,.98-1.435,2.24-1.435,3.762,0,5.355,3.255,6.563,6.37,6.913-.403,.35-.77,.963-.893,1.872-.805,.368-2.818,.963-4.077-1.155-.263-.42-1.05-1.452-2.152-1.435-1.173,.018-.472,.665,.017,.927,.595,.332,1.277,1.575,1.435,1.978,.28,.787,1.19,2.293,4.707,1.645,0,1.173,.018,2.275,.018,2.607,0,.368-.263,.787-.963,.665-5.719-1.904-9.576-7.255-9.573-13.283,0-7.735,6.265-14,14-14Z"></path></svg>' />
-                <a href="https://github.com/AshimeeAlt/">Github Alt</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M8.5,2L3.143,7.357V26.643h6.429v5.357l5.357-5.357h4.286l9.643-9.643V2H8.5ZM26.714,15.929l-4.286,4.286h-4.286l-3.75,3.75v-3.75h-4.821V4.143H26.714V15.929Z"></path><path d="M21.357 7.893H23.5V14.322H21.357z"></path><path d="M15.464 7.893H17.607V14.322H15.464z"></path></svg>' />
-                <a href="https://twitch.tv/SSMcLive/">Twitch</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M31.331,8.248c-.368-1.386-1.452-2.477-2.829-2.848-2.496-.673-12.502-.673-12.502-.673,0,0-10.007,0-12.502,.673-1.377,.37-2.461,1.462-2.829,2.848-.669,2.512-.669,7.752-.669,7.752,0,0,0,5.241,.669,7.752,.368,1.386,1.452,2.477,2.829,2.847,2.496,.673,12.502,.673,12.502,.673,0,0,10.007,0,12.502-.673,1.377-.37,2.461-1.462,2.829-2.847,.669-2.512,.669-7.752,.669-7.752,0,0,0-5.24-.669-7.752ZM12.727,20.758V11.242l8.364,4.758-8.364,4.758Z"></path></svg>' />
-                <a href="https://www.youtube.com/channel/UC5VpHnhQYLoc7rkLSBzK8GA/">Youtube</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M2.424,17.977l.068-10.18c.012-1.843,1.301-3.423,3.08-3.775l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.013,1.842-1.302,3.421-3.081,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.828Z" opacity=".2"></path><path d="M7.241,22.039l.068-10.182c.011-1.841,1.301-3.42,3.08-3.773l9.831-1.948c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.842-1.301,3.421-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827v-.002Z" opacity=".5"></path><path d="M12.058,26.1l.068-10.182c.012-1.843,1.301-3.421,3.08-3.774l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.843-1.301,3.422-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827h0Z" opacity=".8"></path></svg>' />
-                <a href="https://scratch.mit.edu/users/0znzw/">Scratch</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M2.424,17.977l.068-10.18c.012-1.843,1.301-3.423,3.08-3.775l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.013,1.842-1.302,3.421-3.081,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.828Z" opacity=".2"></path><path d="M7.241,22.039l.068-10.182c.011-1.841,1.301-3.42,3.08-3.773l9.831-1.948c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.842-1.301,3.421-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827v-.002Z" opacity=".5"></path><path d="M12.058,26.1l.068-10.182c.012-1.843,1.301-3.421,3.08-3.774l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.843-1.301,3.422-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827h0Z" opacity=".8"></path></svg>' />
-                <a href="https://disqus.com/by/AshmiiPlus1/">Disqus</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M2.424,17.977l.068-10.18c.012-1.843,1.301-3.423,3.08-3.775l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.013,1.842-1.302,3.421-3.081,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.828Z" opacity=".2"></path><path d="M7.241,22.039l.068-10.182c.011-1.841,1.301-3.42,3.08-3.773l9.831-1.948c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.842-1.301,3.421-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827v-.002Z" opacity=".5"></path><path d="M12.058,26.1l.068-10.182c.012-1.843,1.301-3.421,3.08-3.774l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.843-1.301,3.422-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827h0Z" opacity=".8"></path></svg>' />
-                <a href="https://gamejolt.com/@yri5/">GameJolt</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M27.332,10.323c-1.07,0-2.055,.361-2.842,.967-2.143-1.326-4.848-2.16-7.807-2.271v-.013c0-1.983,1.474-3.629,3.386-3.9v-.003c.347,1.47,1.666,2.564,3.242,2.564,1.84,0,3.331-1.491,3.331-3.331s-1.491-3.331-3.331-3.331c-1.609,0-2.95,1.14-3.262,2.657-2.694,.289-4.798,2.574-4.798,5.343v.017c-2.93,.123-5.605,.957-7.729,2.274-.789-.611-1.779-.974-2.853-.974-2.578,0-4.668,2.09-4.668,4.668,0,1.871,1.099,3.483,2.688,4.228,.155,5.419,6.06,9.778,13.323,9.778s13.176-4.364,13.323-9.787c1.576-.75,2.666-2.357,2.666-4.217,0-2.578-2.09-4.668-4.668-4.668ZM7.334,17.952c.078-1.693,1.203-2.992,2.51-2.992s2.307,1.373,2.229,3.066c-.078,1.693-1.054,2.308-2.363,2.308s-2.453-.689-2.375-2.382Zm13.596,4.424c-.804,1.922-2.703,3.273-4.919,3.273s-4.114-1.351-4.919-3.273c-.095-.228,.061-.483,.306-.508,1.437-.145,2.991-.225,4.613-.225s3.175,.08,4.613,.225c.245,.025,.401,.28,.306,.508Zm1.384-2.043c-1.307,0-2.285-.614-2.363-2.308-.078-1.693,.92-3.066,2.229-3.066s2.433,1.299,2.51,2.992c.078,1.693-1.068,2.382-2.375,2.382Z"></path></svg>' />
-                <a href="https://www.reddit.com/user/Sea1U/">Reddit</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M23.931,5.298c-3.21,2.418-6.663,7.32-7.931,9.951-1.267-2.631-4.721-7.533-7.931-9.951-2.316-1.744-6.069-3.094-6.069,1.201,0,.857,.49,7.206,.778,8.237,.999,3.583,4.641,4.497,7.881,3.944-5.663,.967-7.103,4.169-3.992,7.372,5.908,6.083,8.492-1.526,9.154-3.476,.123-.36,.179-.527,.179-.379,0-.148,.057,.019,.179,.379,.662,1.949,3.245,9.558,9.154,3.476,3.111-3.203,1.671-6.405-3.992-7.372,3.24,.553,6.882-.361,7.881-3.944,.288-1.031,.778-7.38,.778-8.237,0-4.295-3.753-2.945-6.069-1.201Z"></path></svg>' />
-                <a href="https://bsky.app/profile/miyo.icu/">Bluesky</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M2.424,17.977l.068-10.18c.012-1.843,1.301-3.423,3.08-3.775l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.013,1.842-1.302,3.421-3.081,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.828Z" opacity=".2"></path><path d="M7.241,22.039l.068-10.182c.011-1.841,1.301-3.42,3.08-3.773l9.831-1.948c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.842-1.301,3.421-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827v-.002Z" opacity=".5"></path><path d="M12.058,26.1l.068-10.182c.012-1.843,1.301-3.421,3.08-3.774l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.843-1.301,3.422-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827h0Z" opacity=".8"></path></svg>' />
-                <a href="https://wasteof.money/ya/">wasteof.money</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M30.116,7.642c-.438-3.223-3.278-5.764-6.645-6.256-.568-.083-2.72-.386-7.705-.386h-.037c-4.987,0-6.056,.303-6.624,.386-3.273,.479-6.262,2.761-6.987,6.023-.349,1.606-.386,3.387-.321,5.02,.092,2.343,.11,4.681,.325,7.014,.149,1.55,.408,3.087,.776,4.601,.689,2.795,3.48,5.121,6.214,6.07,2.927,.99,6.075,1.154,9.091,.474,.332-.076,.66-.165,.984-.266,.732-.23,1.591-.488,2.222-.941,.009-.006,.016-.015,.021-.024,.005-.009,.008-.02,.008-.031v-2.261c0-.01-.003-.02-.007-.029-.004-.009-.011-.017-.019-.023-.008-.006-.017-.01-.027-.013-.01-.002-.02-.002-.03,0-1.932,.457-3.913,.685-5.899,.682-3.419,0-4.339-1.605-4.602-2.273-.212-.577-.346-1.18-.4-1.792,0-.01,.001-.021,.006-.03,.004-.009,.011-.018,.019-.024,.008-.006,.018-.011,.028-.013,.01-.002,.021-.002,.031,0,1.9,.453,3.848,.682,5.803,.682,.47,0,.939,0,1.409-.012,1.966-.055,4.038-.154,5.972-.528,.048-.01,.097-.018,.138-.03,3.051-.579,5.954-2.398,6.249-7.004,.011-.181,.039-1.899,.039-2.088,.001-.64,.208-4.536-.03-6.931Zm-4.696,11.493h-3.208v-7.772c0-1.636-.689-2.471-2.091-2.471-1.541,0-2.313,.987-2.313,2.937v4.254h-3.189v-4.254c0-1.95-.773-2.937-2.315-2.937-1.394,0-2.09,.834-2.091,2.471v7.772h-3.205V11.127c0-1.636,.422-2.936,1.267-3.9,.871-.961,2.014-1.455,3.433-1.455,1.642,0,2.883,.624,3.71,1.872l.798,1.325,.8-1.325c.827-1.248,2.068-1.872,3.707-1.872,1.417,0,2.56,.494,3.434,1.455,.845,.963,1.267,2.263,1.267,3.9l-.003,8.008Z"></path></svg>' />
-                <a rel="me" href="https://mstdn.party/@yri5/">Mastodon</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M26.111,3H5.889c-1.595,0-2.889,1.293-2.889,2.889V26.111c0,1.595,1.293,2.889,2.889,2.889H26.111c1.595,0,2.889-1.293,2.889-2.889V5.889c0-1.595-1.293-2.889-2.889-2.889ZM10.861,25.389h-3.877V12.87h3.877v12.519Zm-1.957-14.158c-1.267,0-2.293-1.034-2.293-2.31s1.026-2.31,2.293-2.31,2.292,1.034,2.292,2.31-1.026,2.31-2.292,2.31Zm16.485,14.158h-3.858v-6.571c0-1.802-.685-2.809-2.111-2.809-1.551,0-2.362,1.048-2.362,2.809v6.571h-3.718V12.87h3.718v1.686s1.118-2.069,3.775-2.069,4.556,1.621,4.556,4.975v7.926Z" fill-rule="evenodd"></path></svg>' />
-                <a href="https://www.linkedin.com/in/yri5/">Linkedin</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M18.5,30c-4.211,0-7.349-2.166-7.349-7.349V14.35h-3.827v-4.495c4.211-1.094,5.972-4.717,6.175-7.856h4.373v7.127h5.102v5.224h-5.102v7.228c0,2.166,1.094,2.915,2.834,2.915h2.47v5.507h-4.677Z"></path></svg>' />
-                <a href="https://miyodev.tumblr.com/">Tumblr</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M2.424,17.977l.068-10.18c.012-1.843,1.301-3.423,3.08-3.775l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.013,1.842-1.302,3.421-3.081,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.828Z" opacity=".2"></path><path d="M7.241,22.039l.068-10.182c.011-1.841,1.301-3.42,3.08-3.773l9.831-1.948c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.842-1.301,3.421-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827v-.002Z" opacity=".5"></path><path d="M12.058,26.1l.068-10.182c.012-1.843,1.301-3.421,3.08-3.774l9.831-1.949c2.362-.468,4.555,1.38,4.539,3.827l-.068,10.182c-.012,1.843-1.301,3.422-3.08,3.774l-9.831,1.949c-2.362,.468-4.555-1.38-4.539-3.827h0Z" opacity=".8"></path></svg>' />
-                <a href="https://stackoverflow.com/users/15482784/yuri-kiss/">StackOverflow</a>
-              </div>
-              <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="white"><path d="M29.236,9.481c-.125,2.731-2.028,6.47-5.711,11.216-3.807,4.958-7.028,7.436-9.662,7.436-1.632,0-3.013-1.509-4.141-4.529-.754-2.768-1.507-5.535-2.26-8.303-.838-3.018-1.736-4.529-2.697-4.529-.209,0-.942,.442-2.197,1.321l-1.317-1.7c1.382-1.217,2.745-2.433,4.086-3.651,1.843-1.596,3.227-2.435,4.149-2.519,2.179-.21,3.521,1.283,4.024,4.477,.544,3.447,.92,5.591,1.132,6.43,.628,2.86,1.319,4.288,2.074,4.288,.586,0,1.466-.928,2.64-2.782,1.173-1.855,1.801-3.267,1.885-4.236,.167-1.601-.461-2.404-1.885-2.404-.67,0-1.361,.155-2.072,.46,1.376-4.516,4.005-6.71,7.886-6.584,2.877,.085,4.233,1.954,4.068,5.609Z"></path></svg>' />
-                <a href="https://vimeo.com/user202582764/">Vimeo</a>
-              </div>
-              <!-- <div class="social">
-                <img width="16" height="16" src='data:image/svg+xml;,' />
-                <a href="#">#</a>
-              </div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <span class="hbreak"></span>
-      <div class="bottom">
-        <span>Projects</span>
-        <div class="projects">
-          Nothing here right now, come back later.
-          <!--<div class="project">
-            <a href="url">y</a>title
-            <span>- desc</span>
-          </div>-->
-        </div>
-      </div>
+    <div class="main" id="main">
+      <div class="name">yuri-kiss</div>
+      <canvas class="main" width="500" height="500">
+        your browser does not support the canvas element
+      </canvas>
+      <a class="clickwrapper" href="https://miyo.icu/" style="visibility: hidden;">
+        <img class="pfp" alt="profile picture" src="https://gravatar.com/avatar/56ff3cc2bbdd81da1545b16880f7c538?size=256" />
+      </a>
+      <dialog id="about">
+        Hello, I am みよ / みお. I am a 15yro self-taught developer,<br />
+        who likes Furina and Citlali.<br />
+        <strong>Pronouns</strong>: she / her<br />
+        <strong>Sexuality</strong>: bi (prefer girls), girl<br />
+        Random thing about me: <span id="randomfact"></span>
+      </dialog>
     </div>
     <div class="mwah"><span style="display:ruby;" title="Execution by divine decree">
-      <!-- 私は物事を苦しく恐ろしい結末までやり遂げる人間だ。全てが灰になるまで。自分の行動に言い訳はしない。だから傷つけた全ての人へ、愛する人へ。ごめんなさい。 -->
       神の掟による処刑
     </span></div>
-    <script>/** No JavaScript required technically */</script>
+    <script defer>(() => {
+      function copyText(TEXT) {
+        if (navigator.clipboard.writeText) navigator.clipboard.writeText(TEXT);
+        // https://github.com/surv-is-a-dev/gallery/blob/main/site-files/include/generator.js#L384C1-L404C8
+        const active = document.activeElement || document.querySelector('*:focus');
+        const input = document.createElement('input');
+        input.value = TEXT;
+        input.style.top = '0px';
+        input.style.left = '0px';
+        input.style.position = 'fixed';
+        document.body.appendChild(input);
+        input.focus();
+        input.select();
+        try {
+          document.execCommand('copy');
+        } catch {}
+        input.blur();
+        document.body.removeChild(input);
+        if (active) active.focus();
+        input.remove();
+      }
+      let links, linkmaps, start;
+      function writeLinks(lnks) {
+        deleteLinkNodes();
+        links = lnks;
+        generateLinkNodes();
+        start = Date.now();
+        step();
+      }
+      const FACTS = ['I know latin!',
+                     'I prefer cat girls, but dogs vs cats depends.',
+                     'I suck at CSS lmao',
+                     'I love the forest',
+                     'I hate chocolate',
+                     'I am lactose intolerant',
+                     'I am kind of lewd hahah',
+                     'Furina is best girl <3',
+                    ];
+      const linkfns = {
+        ['main']: () => {
+          window.location.hash = '#';
+          writeLinks([
+                       [
+                       //[25,  '25 ', '#main/about'],
+                       [50,  'miyo.icu ', 'https://miyo.icu/'],
+                       //[75,  '75 ', '#main/about'],
+                       //[100, '100', '#main/about'],
+                       ],
+                       [
+                       //[25,  '25 ', '#main/about'],
+                       [50,  'about me ', '#main/about'],
+                       //[75,  '75 ', '#main/about'],
+                       //[100, '100', '#main/about'],
+                       ],
+                       [
+                       //[25,  '25 ', '#main/about'],
+                       [50,  'socials', '#main/socials'],
+                       //[75,  '75 ', '#main/about'],
+                       //[100, '100', '#main/about'],
+                       ],
+                     ]);
+        },
+        ['main/about']: () => {
+          window.location.hash = '#about'
+          document.getElementById('about').showModal();
+          document.getElementById('randomfact').textContent = FACTS[Math.floor(Math.random() * FACTS.length)];
+        },
+        ['main/socials']: () => {
+          window.location.hash = '#socials';
+          writeLinks([
+                       [
+                       [10,  'RiotGames', '#socials/riotgames'],
+                       [20,  'StackOverflow', 'https://stackoverflow.com/users/15482784/yuri-kiss/'],
+                       [25,  'GitHub', 'https://github.com/yuri-kiss/'],
+                       [35,  'Reddit', 'https://www.reddit.com/user/Sea1U/'],
+                       [50,  'miyo.icu', 'https://miyo.icu/'],
+                       [65,  'wasteof', 'https://wasteof.money/ya/'],
+                       [75,  'Gravatar', 'https://gravatar.com/miyosho/'],
+                       [80,  'Vimeo', 'https://vimeo.com/user202582764/'],
+                       [90,  'Tumblr', 'https://miyodev.tumblr.com/'],
+                       [100, 'LinkedIn', 'https://www.linkedin.com/in/yri5/'],
+                       ],
+                       [
+                       [10,  'GitLab', 'https://gitlab.com/Ashmii/'],
+                       [25,  'Twitch', 'https://twitch.tv/SSMcLive/'],
+                       [35,  'Disqus', 'https://disqus.com/by/AshmiiPlus1/'],
+                       [50,  'Youtube', 'https://www.youtube.com/channel/UC5VpHnhQYLoc7rkLSBzK8GA/'],
+                       [65,  'BlueSky', 'https://bsky.app/profile/miyo.icu/'],
+                       [75,  'Scratch', 'https://scratch.mit.edu/users/0znzw/'],
+                       [90,  'Mastadon', 'https://mstdn.party/@yri5/'],
+                       [100, 'GameJolt', 'https://gamejolt.com/@yri5/'],
+                       ],
+                       [
+                       //[25,  '25 ', '#main/about'],
+                       [50,  'BACK', '#main'],
+                       //[75,  '75 ', '#main/about'],
+                       [100, 'Discord', '#socials/discord'],
+                       ],
+                     ]);
+        },
+        ['socials/riotgames']: () => {
+          copyText('miyosho#chan');
+          alert('Copied miyosho#chan to the clipboard!');
+        },
+        ['socials/discord']: () => {
+          copyText('yri5');
+          alert('Copied yri5 to the clipboard!');
+        },
+      };
+    
+      const canvas = document.querySelector('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      function drawPercentageCircle(ctx, centerX, centerY, radius, percentage) {
+        const endAngle = (percentage / 100) * 2 * Math.PI;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, endAngle, false);
+        // ctx.lineTo(centerX, centerY);
+        // ctx.fill();
+        ctx.stroke();
+      }
+      
+      const duration = 1552;
+      
+      function circle(start, r) {
+        const now = Date.now();
+        if (now < start) return 0;
+        let percent = (now - start) / duration * 100;
+        if (percent > 100) percent = 100;
+        drawPercentageCircle(ctx, 250, 250, r, percent);
+        return percent;
+      }
+      const crv = [(canvas.width / 2) - 5, 0, 0];
+      crv[1] = (crv[0] / 2);
+      crv[2] = (crv[0] / 2 / 2);
+      const cto = [0, 0, 0];
+      cto[1] = (cto[0] + 120);
+      cto[2] = (cto[1] + 240);
+
+      ctx.strokeStyle = 'white';
+      // ctx.fillStyle = 'blue';
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
+      function step() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let p = 0;
+        for (let i = 0; i < 3; ++i) {
+          p = circle(start + cto[i], crv[i]);
+          const keys = Object.keys(linkmaps[i]);
+          for (const key of keys) {
+            if (p < +key) continue;
+            linkmaps[i][key].style.visibility = 'visible';
+            linkmaps[i][key].style.opacity = 1.0;
+            delete linkmaps[i][key];
+          }
+        }
+        if (p < 100) requestAnimationFrame(step);
+        else after();
+      }
+      
+      const name = document.querySelector('div.name');
+      const pfp = document.querySelector('img.pfp');
+      function after() {
+        pfp.parentElement.style.visibility = 'visible';
+        pfp.style.opacity = 1.0;
+        name.style.opacity = 1.0;
+      }
+
+      const PI2 = Math.PI * 2;
+      const PIH = Math.PI / 2;
+      function mapCircleLink(node, percent, circle) {
+        const radians = PI2 * (percent / 100);
+        const radius = crv[circle] * 2;
+        const x = Math.sin(radians) * radius;
+        const y = Math.cos(radians) * radius;
+        const lrm = (radians == PIH || radians == (Math.PI + PIH)) ?
+         (0/*center*/) : ((
+          (radians >= PIH) &&
+          (radians <= (Math.PI + PIH))
+        ) ? (-1/*left*/) : (+1/*right*/));
+        const tbc = (radians == Math.PI || radians == PI2) ?
+         (0/*center*/) : ((
+          (radians <= Math.PI)
+        ) ? (-1/*bottom*/) : (+1/*top*/));
+        node.dataset.lrm = String(lrm);
+        node.dataset.tbc = String(tbc);
+        const left = ((x / canvas.width) * 28) + 50;
+        const top = ((y / canvas.height) * 44) + 50;
+        node.style.left = `${left}%`;
+        node.style.top = `${top}%`;
+        node.style.transform = `translate(-50%, -50%)`;
+      }
+      
+      function generateLinkNodes() {
+        for (let i = 0; i < links.length; ++i) {
+          const map = Object.create(null);
+          for (const link of links[i]) {
+            const node = document.createElement('a');
+            node.classList = 'circlelink';
+            node.dataset.circle = String(i);
+            node.href = link[2];
+            node.textContent = link[1];
+            document.body.appendChild(node);
+            mapCircleLink(node, link[0], i);
+            if (link[2].startsWith('#'))
+              node.addEventListener('click', function(ev) {
+                ev.preventDefault();
+                return linkfns[this.href.slice(this.href.indexOf('#') + 1)](ev);
+              });
+            map[link[0]] = node;
+          }
+          linkmaps.push(map);
+        }
+      }
+      function deleteLinkNodes() {
+        document.querySelectorAll('a.circlelink').forEach(node => node.remove());
+        linkmaps = [];
+        links = [];
+      }
+      let hash = window.location.hash.trim();
+      if (hash[0] === '#') hash = hash.slice(1, Infinity);
+      if (hash === 'socials') {
+        linkfns['main/socials']();
+      } else {
+        linkfns['main']();
+        if (hash === 'about') linkfns['main/about']();
+      }
+    })();</script>
   </body>
 </html>
-
-
-
