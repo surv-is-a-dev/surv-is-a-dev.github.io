@@ -62,14 +62,9 @@
     </style>
   </head>
   <body>
-    <main class="main" id="main">
+    <main class="main with-script" id="main">
       <noscript>
         <style>
-          main {
-            display: none;
-            visibility: hidden;
-            pointer-events: none;
-          }
           noscript {
             position: absolute;
             display: flex;
@@ -80,6 +75,11 @@
             align-items: center;
             justify-content: center;
             z-index: 32767;
+          }
+          *.with-script {
+            display: none;
+            visibility: hidden;
+            pointer-events: none;
           }
         </style>
         <strong>This site requires JavaScript, please enable it and reload!</strong>
