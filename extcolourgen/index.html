@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <!-- License: AGPL-3.0 -->
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Device META -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="miyo.icu - Blockly and Scratch™ extension colour generator" />
+    <meta name="description" content="Colour 1 (primary) - Colour 4 (quaternary) generator for Blockly categories and Scratch™ extensions."" />
+    <meta name="keywords" content="Miyo, Miyo Sho, TurboWarp, Scratch, Extensions, Colour, Color, Utility, Generator" />
+    <meta name="author" content="Miyo Sho" />
+    <meta name="url" content="https://miyo.icu/extcolourgen/" />
+    <meta property="type" content="website" />
+    <meta name="theme-color" content="#f75283" />
+    <!-- Facebook / Open graph / Skype -->
+    <meta property="og:title" content="miyo.icu - Blockly and Scratch™ extension colour generator" />
+    <meta name="og:description" content="Colour 1 (primary) - Colour 4 (quaternary) generator for Blockly categories and Scratch™ extensions."" />
+    <meta name="og:keywords" content="Miyo, Miyo Sho, TurboWarp, Scratch, Extensions, Colour, Color, Utility, Generator" />
+    <meta name="og:author" content="Miyo Sho" />
+    <meta name="og:url" content="https://miyo.icu/extcolourgen/" />
+    <meta property="og:type" content="website" />
+    <meta name="og:theme-color" content="#f75283" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://miyo.icu/extcolourgen/" />
+    <meta property="twitter:title" content="miyo.icu - blockly and Scratch™ extension colour generator" />
+    <meta property="twitter:description" content="Colour 1 (primary) - Colour 4 (quaternary) generator for Blockly categories and Scratch™ extensions." />
+    <!-- End META -->
+    <title>miyo.icu - Blockly and Scratch™ extension colour generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet" />
+    <style>
+      main, header, div {
+        margin: 0px;
+        padding: 0px;
+      }
+      :root, html, body {
+        margin: 0px;
+        padding: 0px;
+        background: rgb(33, 37, 41);
+        background-size: cover;
+        color: white;
+        font-family: "Sofia Sans", Helvetica, Arial, sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        color-scheme: dark;
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+      main {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="main" id="main">
+      <noscript>
+        <style>
+          main {
+            display: none;
+            visibility: hidden;
+            pointer-events: none;
+          }
+          noscript {
+            position: absolute;
+            display: flex;
+            visibility: visible;
+            pointer-events: none;
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            z-index: 32767;
+          }
+        </style>
+        <strong>This site requires JavaScript, please enable it and reload!</strong>
+      </noscript>
+      <div class="with-script">
+        <h2>Blockly and Scratch™ extension colour generator.</h1>
+        <a href="https://github.com/surv-is-a-dev/surv-is-a-dev.github.io/blob/main/extcolourgen/index.html" title="This site is open source.">This site is open source! and is created by Miyo Sho</a>
+        <h3>Input:</h3>
+        <label for="colour1">Colour 1 (primary): <input type="color" name="colour1" value="#000000" /><input type="text" readonly value="#000000" /></label><br />
+        <h3>Generated:</h3>
+        <label for="colour2">Colour 2 (secondary): <input type="color" name="colour2" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
+        <label for="colour3">Colour 3 (tertiary): <input type="color" name="colour3" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
+        <label for="colour4">Colour 4 (quaternary): <input type="color" name="colour4" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
+        <br />
+        <span style="opacity: 0.6;">(this uses the same algorithm Blockly uses to generate its colours)</span>
+      </div>
+    </main>
+    <script type="text/javascript" defer="">void function() {
+       const Colours = { __proto: null };
+       Colours.HEXtoRGBA = (hex) => {
+         if (Array.isArray(hex)) return hex;
+         const octet = (s, e) => parseInt(hex.slice(s, e) || '', 16) || 0;
+       
+         hex = hex.replace('#', '');
+         switch(hex.length) {
+           case 3:
+             return [octet(0, 1).repeat(2), octet(1, 2).repeat(2), octet(2, 3).repeat(2), 255];
+           case 4:
+             return [octet(0, 1).repeat(2), octet(1, 2).repeat(2), octet(2, 3).repeat(2), octet(3, 4).repeat(2)];
+           case 6:
+             return [octet(0, 2), octet(2, 4), octet(4, 6), 255];
+           case 8:
+             return [octet(0, 2), octet(2, 4), octet(4, 6), 255];
+           default:
+             return [0, 0, 0, 255];
+         }
+       };
+       Colours.RGBAtoHEX = (rgb) => {
+         const a = (rgb[3] ?? 255).toString(16).padStart(2, '0');
+         return `#${
+           (rgb[0] ?? 0).toString(16).padStart(2, '0')
+         }${
+           (rgb[1] ?? 0).toString(16).padStart(2, '0')
+         }${
+           (rgb[2] ?? 0).toString(16).padStart(2, '0')
+         }${
+           a === 'ff' ? '' : a
+         }`;
+       };
+       Colours.roundOctet = (octet) => {
+         return Math.max(Math.min(Math.round(octet), 255), 0);
+       };
+       Colours.LightenDarkenRGB = (rgb, amt) => {
+         rgb = [].concat(rgb);
+         rgb[0] = Colours.roundOctet(rgb[0] * amt);
+         rgb[1] = Colours.roundOctet(rgb[1] * amt);
+         rgb[2] = Colours.roundOctet(rgb[2] * amt);
+         return rgb;
+       };
+       
+      /* Quote the Blockly developers:
+       # Converts a single colour to primary, secondary and tertiary colours.
+       # Primary Colour - The colour given
+       # Secondary Colour - Lightens the primary colour by .8
+       # Tertiary Colour - Darkens the primary colour by .2
+       */
+       
+       Colours.Secondary = (primary_hex_or_rgba) => {
+         return Colours.RGBAtoHEX(Colours.LightenDarkenRGB(Colours.HEXtoRGBA(primary_hex_or_rgba), 1.8));
+       };
+       Colours.Tertiary = (primary_hex_or_rgba) => {
+         return Colours.RGBAtoHEX(Colours.LightenDarkenRGB(Colours.HEXtoRGBA(primary_hex_or_rgba), 0.8));
+       };
+       Colours.Quaternary = Colours.Tertiary;
+       
+       const colour1 = [
+         document.querySelector('label[for="colour1"] > input[type="color"]'),
+         document.querySelector('label[for="colour1"] > input[type="text"]'),
+       ];
+       const colour2 = [
+         document.querySelector('label[for="colour2"] > input[type="color"]'),
+         document.querySelector('label[for="colour2"] > input[type="text"]'),
+       ];
+       const colour3 = [
+         document.querySelector('label[for="colour3"] > input[type="color"]'),
+         document.querySelector('label[for="colour3"] > input[type="text"]'),
+       ];
+        const colour4 = [
+         document.querySelector('label[for="colour4"] > input[type="color"]'),
+         document.querySelector('label[for="colour4"] > input[type="text"]'),
+       ];
+       
+       colour1[0].addEventListener('change', () => {
+         const primary = (colour1[1].value = colour1[0].value.toString());
+         
+         colour2[0].value = (colour2[1].value = Colours.Secondary(primary));
+         colour3[0].value = (colour3[1].value = Colours.Tertiary(primary));
+         colour4[0].value = (colour4[1].value = Colours.Quaternary(primary));
+       });
+    }();</script>
+  </body>
+</html>
