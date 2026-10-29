@@ -88,11 +88,13 @@
         <h2>Blockly and Scratch™ extension colour generator.</h1>
         <a href="https://github.com/surv-is-a-dev/surv-is-a-dev.github.io/blob/main/extcolourgen/index.html" title="This site is open source.">This site is open source! and is created by Miyo Sho</a>
         <h3>Input:</h3>
-        <label for="colour1">Colour 1 (primary): <input type="color" name="colour1" value="#000000" /><input type="text" readonly value="#000000" /></label><br />
+        <label for="ilf-tweaked">Use tweaked colours: <input type="checkbox" id="ilf-tweaked" checked="" /></label><br />
+        <label for="ilf-colour0">Colour 1 (primary): <input type="color" id="ilf-colour0" value="#000000" /><input type="text" readonly value="#000000" /></label><br />
         <h3>Generated:</h3>
-        <label for="colour2">Colour 2 (secondary): <input type="color" name="colour2" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
-        <label for="colour3">Colour 3 (tertiary): <input type="color" name="colour3" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
-        <label for="colour4">Colour 4 (quaternary): <input type="color" name="colour4" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
+        <label for="ilf-colour1">Colour 1 (primary): <input type="color" id="ilf-colour1" value="#000000" /><input type="text" readonly value="#000000" /></label><br />
+        <label for="ilf-colour2">Colour 2 (secondary): <input type="color" name="ilf-colour2" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
+        <label for="ilf-colour3">Colour 3 (tertiary): <input type="color" name="ilf-colour3" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
+        <label for="ilf-colour4">Colour 4 (quaternary): <input type="color" name="ilf-colour4" readonly value="#000000" disabled /><input type="text" readonly value="#000000" /></label><br />
         <br />
         <span style="opacity: 0.6;">(this uses the same algorithm Blockly uses to generate its colours)</span>
       </div>
@@ -142,43 +144,62 @@
        
       /* Quote the Blockly developers:
        # Converts a single colour to primary, secondary and tertiary colours.
-       # Primary Colour - The colour given
-       # Secondary Colour - Lightens the primary colour by .8
-       # Tertiary Colour - Darkens the primary colour by .2
+       # Primary Colour    - The colour given.
+       # Secondary Colour  - Lightens the primary colour by .8
+       # Tertiary Colour   - Darkens the primary colour by .2
+       # Quaternary Colour - Darkens the primary colour by .2
+       # -- My custom tweaked below.
+       # Primary Colour    - The colour given.
+       # Secondary Colour  - Lightens the primary colour by .2
+       # Tertiary Colour   - Darkens the primary colour by .2
+       # Quaternary Colour - Darkens the primary colour by .2
        */
        
-       Colours.Secondary = (primary_hex_or_rgba) => {
-         return Colours.RGBAtoHEX(Colours.LightenDarkenRGB(Colours.HEXtoRGBA(primary_hex_or_rgba), 1.8));
+       Colours.Primary = (primary_hex_or_rgba, tweaked) => {
+         return primary_hex_or_rgba;
        };
-       Colours.Tertiary = (primary_hex_or_rgba) => {
+       Colours.Secondary = (primary_hex_or_rgba, tweaked) => {
+         return Colours.RGBAtoHEX(Colours.LightenDarkenRGB(Colours.HEXtoRGBA(primary_hex_or_rgba), tweaked ? 1.2 : 1.8));
+       };
+       Colours.Tertiary = (primary_hex_or_rgba, tweaked) => {
          return Colours.RGBAtoHEX(Colours.LightenDarkenRGB(Colours.HEXtoRGBA(primary_hex_or_rgba), 0.8));
        };
        Colours.Quaternary = Colours.Tertiary;
-       
+
+       const myTweaks = document.querySelector('label[for="ilf-tweaked"] > input[type="checkbox"]');
+       const colour0 = [
+         document.querySelector('label[for="ilf-colour0"] > input[type="color"]'),
+         document.querySelector('label[for="ilf-colour0"] > input[type="text"]'),
+       ];
        const colour1 = [
-         document.querySelector('label[for="colour1"] > input[type="color"]'),
-         document.querySelector('label[for="colour1"] > input[type="text"]'),
+         document.querySelector('label[for="ilf-colour1"] > input[type="color"]'),
+         document.querySelector('label[for="ilf-colour1"] > input[type="text"]'),
        ];
        const colour2 = [
-         document.querySelector('label[for="colour2"] > input[type="color"]'),
-         document.querySelector('label[for="colour2"] > input[type="text"]'),
+         document.querySelector('label[for="ilf-colour2"] > input[type="color"]'),
+         document.querySelector('label[for="ilf-colour2"] > input[type="text"]'),
        ];
        const colour3 = [
-         document.querySelector('label[for="colour3"] > input[type="color"]'),
-         document.querySelector('label[for="colour3"] > input[type="text"]'),
+         document.querySelector('label[for="ilf-colour3"] > input[type="color"]'),
+         document.querySelector('label[for="ilf-colour3"] > input[type="text"]'),
        ];
         const colour4 = [
-         document.querySelector('label[for="colour4"] > input[type="color"]'),
-         document.querySelector('label[for="colour4"] > input[type="text"]'),
+         document.querySelector('label[for="ilf-colour4"] > input[type="color"]'),
+         document.querySelector('label[for="ilf-colour4"] > input[type="text"]'),
        ];
-       
-       colour1[0].addEventListener('change', () => {
-         const primary = (colour1[1].value = colour1[0].value.toString());
+
+       const refreshColours = () => {
+         const primary = (colour0[1].value = colour0[0].value.toString());
+         const tweaked = Boolean(myTweaks.checked ?? myTweaks.value);
          
-         colour2[0].value = (colour2[1].value = Colours.Secondary(primary));
-         colour3[0].value = (colour3[1].value = Colours.Tertiary(primary));
-         colour4[0].value = (colour4[1].value = Colours.Quaternary(primary));
-       });
+         colour1[0].value = (colour1[1].value = Colours.Primary(primary, tweaked));
+         colour2[0].value = (colour2[1].value = Colours.Secondary(primary, tweaked));
+         colour3[0].value = (colour3[1].value = Colours.Tertiary(primary, tweaked));
+         colour4[0].value = (colour4[1].value = Colours.Quaternary(primary, tweaked));
+       };
+
+       myTweaks.addEventListener('change', refreshColours);
+       colour0[0].addEventListener('change', refreshColours);
     }();</script>
   </body>
 </html>
